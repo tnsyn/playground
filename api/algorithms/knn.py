@@ -46,18 +46,7 @@ class knn:
         return most_common_genre[0][0]
 
 
-# Take in a list of random ratings (0 - 5 inclusive) to create a sample user
-# Use model to predict sample user's favourite genre
-def predict_random_user(k, test_size, ratings):
-    # Load the model
-    model_path = os.path.join('algorithms', 'models', 'user_based_common_movies', f'model_k{k}test{test_size}.sav')
-    model = load(model_path)
-    sample_user = pd.Series(ratings)
-    predicted_genre = model._predict(sample_user)
-    return predicted_genre
-
-
-def apply_knn_user_based_common_movies(k, test_size):
+def apply_knn_user_based_common_movies(k, test_size, ratings):
     # Create a new directory to store the models if the folder does not exist yet
     model_path = os.path.join('algorithms', 'models', 'user_based_common_movies')
     if not os.path.exists(model_path):
@@ -73,26 +62,46 @@ def apply_knn_user_based_common_movies(k, test_size):
     y = dataset['favourite_genre'].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=converted_test_size, random_state=1234)
 
-    model = knn(k)
-    model.fit(X_train, y_train)
-
     # Generate ID for new model created
     # ID will be stored in the format - k{k}test{test_size} in string format
     model_id = f'k{k}test{test_size}'
-    
     filename = os.path.join(model_path, f'model_{model_id}.sav')
+    if os.path.exists(filename):
+        model = load(filename)
+        predictions = model.predict(X_test)
+        accuracy = np.sum(predictions == y_test) / len(y_test)
+        genre = predict_first_random_user(model, ratings)
+        return {'accuracy': accuracy, 'genre': genre}
+
+    model = knn(k)
+    model.fit(X_train, y_train)
     dump(model, filename)
     predictions = model.predict(X_test)
     accuracy = np.sum(predictions == y_test) / len(y_test)
-    return accuracy
+    genre = predict_first_random_user(model, ratings)
+    return {'accuracy': accuracy, 'genre': genre}
 
+
+# Take in a list of random ratings (0 - 5 inclusive) to create a sample user
+# Use model to predict sample user's favourite genre
+def predict_first_random_user(model, ratings):
+    sample_user = pd.Series(ratings)
+    predicted_genre = model._predict(sample_user)
+    return predicted_genre
+
+
+def predict_subsequent_random_users(k, test_size, ratings):
+    model_path = os.path.join('algorithms', 'models', 'user_based_common_movies')
+    model_id = f'k{k}test{test_size}'
+    filename = os.path.join(model_path, f'model_{model_id}.sav')
+    model = load(filename)
+    sample_user = pd.Series(ratings)
+    predicted_genre = model._predict(sample_user)
+    return predicted_genre
 
 
 if __name__ == '__main__':
     test = []
     for i in range(0, 15):
         test.append(random.randint(0, 5))
-    predict_random_user(5, 20, test)
-    # save_trained_model(5, 20)
-    # accuracy_knn(1, 'models/model_OgnNQY.sav')
-    # apply_knn_user_based_filtering(5, 20)
+    # apply_knn_user_based_common_movies(5, 20, test)

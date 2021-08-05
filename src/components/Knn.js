@@ -15,28 +15,30 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Knn = () => {
   const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '50%',
+    accordiion: {
+      width: '60%',
       margin: '0 auto'
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
+    root: {
+      marginTop: "5em"
+    }
   }));
   const classes = useStyles();
 
   return (
-    <Grid container spacing={3} align="center">
+    <Grid container spacing={3} align="center" className={classes.root}>
       <Grid item xs={12}>
         <Typography variant="h4" component="h4">
           Explore the MovieLens Dataset with the k-nearest neighbours algorithm!
         </Typography>
       </Grid>
       <Grid item xs={12}>
-       
       </Grid>
-      <div className={classes.root}>
+      <div className={classes.accordiion}>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
