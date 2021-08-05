@@ -22,7 +22,7 @@ import { commonMovies } from '../constants'
 
 const CommonMovies = () => {
   const [k, setK] = useState(2)
-  const [testSize, setTestSize] = useState(20)
+  const [trainSize, setTrainSize] = useState(80)
   const [accuracy, setAccuracy] = useState(0)
   const [sampleUser, setSampleUser] = useState()
   const [predictedGenre, setPredictedGenre] = useState('')
@@ -53,8 +53,8 @@ const CommonMovies = () => {
 
   const marks = [
     {
-      value: 0,
-      label: '0%',
+      value: 1,
+      label: '1%',
     },
     {
       value: 10,
@@ -108,7 +108,7 @@ const CommonMovies = () => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         k_value: k,
-        test_size: testSize,
+        train_size: trainSize,
         ratings: sampleRatings
       })
     }
@@ -133,7 +133,7 @@ const CommonMovies = () => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         k_value: k,
-        test_size: testSize,
+        train_size: trainSize,
         ratings: sampleRatings
       })
     }
@@ -178,8 +178,8 @@ const CommonMovies = () => {
       <Grid item xs={12}>
         <Slider
           className={classes.slider}
-          onChange={(e, newVal) => setTestSize(newVal)}
-          defaultValue={testSize}
+          onChange={(e, newVal) => setTrainSize(newVal)}
+          defaultValue={trainSize}
           aria-labelledby="discrete-slider-custom"
           step={null}
           valueLabelDisplay="auto"
@@ -187,7 +187,7 @@ const CommonMovies = () => {
         />
         <FormHelperText align="center">
           <div align="center">
-            Percentage of dataset used for testing
+            % of dataset used for training the model
           </div>
         </FormHelperText>
       </Grid>
