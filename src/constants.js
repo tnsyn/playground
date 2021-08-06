@@ -46,7 +46,78 @@ const commonMovies = {
     }
 }
 
+const genres = [
+    'Action',
+    'Adventure',
+    'Animation',
+    'Children',
+    'Comedy',
+    'Crime',
+    'Documentary',
+    'Drama',
+    'Fantasy',
+    'Film Noir',
+    'Horror',
+    'IMAX',
+    'Musical',
+    'Mystery',
+    'Romance',
+    'Sci-Fi',
+    'Thriller',
+    'War',
+    'Western'
+]
+
+const marks = [
+    {
+      value: 1,
+      label: '1%',
+    },
+    {
+      value: 10,
+      label: '10%',
+    },
+    {
+      value: 20,
+      label: '20%',
+    },
+    {
+      value: 30,
+      label: '30%',
+    },
+    {
+      value: 40,
+      label: '40%',
+    },
+    {
+      value: 50,
+      label: '50%',
+    },
+    {
+      value: 60,
+      label: '60%',
+    },
+    {
+      value: 70,
+      label: '70%',
+    },
+    {
+      value: 80,
+      label: '80%',
+    },
+    {
+      value: 90,
+      label: '90%',
+    },
+    {
+      value: 99,
+      label: '99%',
+    },
+  ];
+
 
 module.exports = {
-    commonMovies
+    commonMovies,
+    genres,
+    marks
 }
