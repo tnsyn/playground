@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import { commonMovies } from '../constants'
+import { commonMovies, marks } from '../constants'
 
 const CommonMovies = () => {
   const [k, setK] = useState(2)
@@ -32,13 +32,6 @@ const CommonMovies = () => {
     slider: {
       width: '70%',
     },
-    ratings: {
-      display: "flex",
-      textAlign: "center"
-    },
-    style: {
-      display: "flex"
-    },
     cursor: {
       cursor: 'pointer'
     },
@@ -51,52 +44,6 @@ const CommonMovies = () => {
     }
   }));
 
-  const marks = [
-    {
-      value: 1,
-      label: '1%',
-    },
-    {
-      value: 10,
-      label: '10%',
-    },
-    {
-      value: 20,
-      label: '20%',
-    },
-    {
-      value: 30,
-      label: '30%',
-    },
-    {
-      value: 40,
-      label: '40%',
-    },
-    {
-      value: 50,
-      label: '50%',
-    },
-    {
-      value: 60,
-      label: '60%',
-    },
-    {
-      value: 70,
-      label: '70%',
-    },
-    {
-      value: 80,
-      label: '80%',
-    },
-    {
-      value: 90,
-      label: '90%',
-    },
-    {
-      value: 99,
-      label: '99%',
-    },
-  ];
 
   const generateAndPredictSampleUser = () => {
     let sampleRatings = []

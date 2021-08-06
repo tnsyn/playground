@@ -1,5 +1,6 @@
 import React from 'react'
 import CommonMovies from './CommonMovies'
+import AverageRatings from './AverageRatings'
 import {
   Button,
   Grid,
@@ -15,13 +16,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Knn = () => {
   const useStyles = makeStyles((theme) => ({
-    accordiion: {
-      width: '60%',
+    accordion: {
+      width: '85%',
       margin: '0 auto'
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
+      margin: '0 auto'
     },
     root: {
       marginTop: "5em"
@@ -38,7 +40,7 @@ const Knn = () => {
       </Grid>
       <Grid item xs={12}>
       </Grid>
-      <div className={classes.accordiion}>
+      <div className={classes.accordion}>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -66,7 +68,7 @@ const Knn = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            To be filled in
+            <AverageRatings />
           </AccordionDetails>
         </Accordion>
       </div>

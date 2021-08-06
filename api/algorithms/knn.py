@@ -33,9 +33,10 @@ class knn:
     def _predict_genre(self, x):
         # Compute distances between current user and all other users
         distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
+        
 
         # Find smallest k distances to find k nearest neighbours
-        k_indices = np.argsort(distances)[:self.k]
+        k_indices = np.argsort(distances)[:int(self.k)]
 
         # Find out favourite genre of each neighbour
         neighbour_genres = [self.y_train[i] for i in k_indices]
@@ -47,9 +48,8 @@ class knn:
     
     def recommend_movies(self, x):
         distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
-
         # Find smallest k distances to find k nearest neighbours
-        k_indices = np.argsort(distances)[:self.k]
+        k_indices = np.argsort(distances)[:int(self.k)]
 
         # Find out the list of top movies for each neighbour
         neighbour_movies = [self.y_train[i] for i in k_indices]
@@ -148,14 +148,14 @@ def apply_knn_user_based_average_ratings(k, test_size, ratings):
         model = load(filename)
         sample_user = pd.Series(ratings)
         recommendations = model.recommend_movies(sample_user)
-        return {'movies': recommendations}
+        return recommendations
     else:
         model = knn(k)
         model.fit(X_train, y_train)
         dump(model, filename)
         sample_user = pd.Series(ratings)
         recommendations = model.recommend_movies(sample_user)
-        return {'movies': recommendations}
+        return recommendations
 
 
 
@@ -163,5 +163,5 @@ if __name__ == '__main__':
     test = []
     for i in range(0, 19):
         test.append(random.randint(0, 5))
-    apply_knn_user_based_average_ratings(5, 20, test)
+    apply_knn_user_based_average_ratings(4, 20, test)
     # apply_knn_user_based_common_movies(5, 20, test)
