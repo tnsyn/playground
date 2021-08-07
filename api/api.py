@@ -1,5 +1,5 @@
-from flask import Flask, request, json
-from algorithms.knn import apply_knn_user_based_common_movies, predict_subsequent_random_users, apply_knn_user_based_average_ratings
+from flask import Flask, request, json, abort, Response
+from algorithms.knn import apply_knn_user_based_common_movies, predict_subsequent_random_users, apply_knn_user_based_average_ratings, apply_knn_item_based_movie_ratings
 
 app = Flask(__name__)
 
@@ -31,6 +31,16 @@ def run_average_ratings_and_predict():
   recommendations = []
   for r in result:
     recommendations.append(r[0])
+  return {'movies': recommendations}
+
+
+@app.route('/api/knn/item-based-movie-ratings', methods=['POST'])
+def run_movie_ratings_and_predict():
+  no_of_recommendations = int(json.loads(request.data)['no_of_recommendations'])
+  given_movie = json.loads(request.data)['given_movie']
+  recommendations = apply_knn_item_based_movie_ratings(no_of_recommendations, given_movie)
+  if not recommendations: 
+    return Response(status=404)
   return {'movies': recommendations}
 
 
