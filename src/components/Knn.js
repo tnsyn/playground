@@ -1,6 +1,7 @@
 import React from 'react'
 import CommonMovies from './CommonMovies'
 import AverageRatings from './AverageRatings'
+import MovieRatings from './MovieRatings'
 import {
   Button,
   Grid,
@@ -69,6 +70,21 @@ const Knn = () => {
           </AccordionSummary>
           <AccordionDetails>
             <AverageRatings />
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>
+              Item-based Collaborative Filtering:
+              Using ratings for each movie to determine movie similarity
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <MovieRatings />
           </AccordionDetails>
         </Accordion>
       </div>

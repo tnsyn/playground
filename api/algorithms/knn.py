@@ -1,8 +1,9 @@
 import pandas as pd 
 from sklearn.model_selection import train_test_split
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics import confusion_matrix
+from scipy.sparse import csr_matrix
 import random
 import numpy as np 
 from collections import Counter
@@ -158,10 +159,41 @@ def apply_knn_user_based_average_ratings(k, test_size, ratings):
         return recommendations
 
 
+def apply_knn_item_based_movie_ratings(no_of_recommendations, given_movie):
+    movies = pd.read_csv('dataset/movies.csv')
+    dataset = pd.read_csv('dataset/item_based_movie_ratings.csv')
+
+    csr_data = csr_matrix(dataset.values)
+    model = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=no_of_recommendations + 1, n_jobs=-1)
+    model.fit(csr_data)
+
+    dataset.reset_index(inplace=True)
+    # See if provided movie exists in the dataset
+    movie_list = movies[movies['title'].str.contains(given_movie, case=False)]
+    if len(movie_list):
+        # Extract the movieId
+        movieId = movie_list.iloc[0]['movieId']
+        # Extract the index of the movie in the dataset
+        index = dataset[dataset['movieId'] == movieId].index[0]
+        distances, indices = model.kneighbors(csr_data[index])
+        combined_index_distance = list(zip(distances.squeeze().tolist(), indices.squeeze().tolist()))[1:]
+        sorted_results = sorted(combined_index_distance)
+
+        recommendations = []
+        for entry in sorted_results:
+            index = entry[1]
+            movie_id = dataset.iloc[index]['movieId']
+            movie_title = movies[movies['movieId'] == movie_id]['title'].values[0]
+            recommendations.append(movie_title)
+        return recommendations
+    else:
+        return
+
 
 if __name__ == '__main__':
     test = []
     for i in range(0, 19):
         test.append(random.randint(0, 5))
-    apply_knn_user_based_average_ratings(4, 20, test)
+    # apply_knn_user_based_average_ratings(4, 20, test)
     # apply_knn_user_based_common_movies(5, 20, test)
+    get_recommended_movies(10, 'Iron Man')

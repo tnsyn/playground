@@ -62,7 +62,6 @@ const AverageRatings = () => {
             return response.json()
           }
         }).then(data => {
-          console.log(data)
           setRecommendations(data.movies)
           setSampleUser(sampleRatings)
         })
