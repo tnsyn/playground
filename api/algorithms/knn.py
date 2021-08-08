@@ -47,7 +47,7 @@ class knn:
 
         return most_common_genre[0][0]
     
-    def recommend_movies(self, x):
+    def recommend_movies(self, x, no_of_recommendations):
         distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
         # Find smallest k distances to find k nearest neighbours
         k_indices = np.argsort(distances)[:int(self.k)]
@@ -67,7 +67,7 @@ class knn:
                     processed_movie = movie.replace('"]', '')
                 unpacked_movies.append(processed_movie)
 
-        most_common_movie = Counter(unpacked_movies).most_common(10)
+        most_common_movie = Counter(unpacked_movies).most_common(no_of_recommendations)
         return most_common_movie
 
 
@@ -125,7 +125,7 @@ def predict_subsequent_random_users(k, test_size, ratings):
     return predicted_genre
 
 
-def apply_knn_user_based_average_ratings(k, test_size, ratings):
+def apply_knn_user_based_average_ratings(k, test_size, ratings, no_of_recommendations):
     # Create a new directory to store the models if the folder does not exist yet
     model_path = os.path.join('algorithms', 'models', 'user_based_average_ratings')
     if not os.path.exists(model_path):
@@ -148,14 +148,14 @@ def apply_knn_user_based_average_ratings(k, test_size, ratings):
     if os.path.exists(filename):
         model = load(filename)
         sample_user = pd.Series(ratings)
-        recommendations = model.recommend_movies(sample_user)
+        recommendations = model.recommend_movies(sample_user, no_of_recommendations)
         return recommendations
     else:
         model = knn(k)
         model.fit(X_train, y_train)
         dump(model, filename)
         sample_user = pd.Series(ratings)
-        recommendations = model.recommend_movies(sample_user)
+        recommendations = model.recommend_movies(sample_user, no_of_recommendations)
         return recommendations
 
 
