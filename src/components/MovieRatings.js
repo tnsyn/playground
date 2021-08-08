@@ -7,7 +7,6 @@ import {
   FormHelperText,
   FormControl,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
 
 const MovieRatings = () => {
     const [noOfRecommendations, setNoOfRecommendations] = useState(10)
@@ -15,16 +14,6 @@ const MovieRatings = () => {
     const [recommendations, setRecommendations] = useState([])
     const [runAlgorithm, setRunAlgorithm] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
-
-    const useStyles = makeStyles(() => ({
-      label: {
-        margin: '0.8em'
-      },
-      margin: {
-        marginBottom: '1em'
-      }
-    }));
-
 
     const handleRunAlgorithm = () => {
       const requestOptions = {
@@ -49,7 +38,6 @@ const MovieRatings = () => {
       })
     }
     
-    const classes = useStyles()
     return (
       <Grid container spacing={2} align="center">
         <Grid item xs={12}>
@@ -73,46 +61,46 @@ const MovieRatings = () => {
               </div>
             </FormHelperText>
           </FormControl>
-          <Grid item xs={12}>
-            <FormControl>
-              <TextField
-                required={true}
-                defaultValue={noOfRecommendations}
-                onChange={e => setNoOfRecommendations(e.target.value)}
-                type="number"
-                inputProps={{
-                  min: 1,
-                  style: {textAlign: "center"}
-                }}
-              />    
-              <FormHelperText className={classes.margin}>
-                <div align="center">
-                  Number of recommendations
-                </div>
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained" color="primary" onClick={handleRunAlgorithm}>Run algorithm</Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography align="center" className={classes.label} variant="h6" component="h6" color="error">
-              {errorMsg}
-            </Typography>
-          </Grid>
-          {runAlgorithm && (
-            <Typography align="left" className={classes.label} variant="h6" component="h6">
-              Movie Recommendations: 
-              <ul>
-                {recommendations.map(movie => (
-                  <li>
-                    <b>{movie}</b>
-                  </li>
-                ))}
-              </ul>       
-            </Typography>
-        )}
-      </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl>
+            <TextField
+              required={true}
+              defaultValue={noOfRecommendations}
+              onChange={e => setNoOfRecommendations(e.target.value)}
+              type="number"
+              inputProps={{
+                min: 1,
+                style: {textAlign: "center"}
+              }}
+            />    
+            <FormHelperText>
+              <div align="center">
+                Number of movies to recommend
+              </div>
+            </FormHelperText>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" onClick={handleRunAlgorithm}>Run algorithm</Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography align="center" variant="h6" component="h6" color="error">
+            {errorMsg}
+          </Typography>
+        </Grid>
+        {runAlgorithm && (
+          <Typography align="left" variant="h6" component="h6">
+            Movie Recommendations: 
+            <ul>
+              {recommendations.map(movie => (
+                <li>
+                  <b>{movie}</b>
+                </li>
+              ))}
+            </ul>       
+          </Typography>
+      )}
   </Grid>
 )}
 

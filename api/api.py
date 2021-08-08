@@ -27,7 +27,8 @@ def run_average_ratings_and_predict():
   k = json.loads(request.data)['k_value']
   test_size = 100 - json.loads(request.data)['train_size']
   average_ratings = json.loads(request.data)['ratings']
-  result = apply_knn_user_based_average_ratings(k, test_size, average_ratings)
+  no_of_recommendations = int(json.loads(request.data)['no_of_recommendations'])
+  result = apply_knn_user_based_average_ratings(k, test_size, average_ratings, no_of_recommendations)
   recommendations = []
   for r in result:
     recommendations.append(r[0])
