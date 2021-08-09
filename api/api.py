@@ -1,5 +1,7 @@
 from flask import Flask, request, json, abort, Response
 from algorithms.knn import apply_knn_user_based_common_movies, predict_subsequent_random_users, apply_knn_user_based_average_ratings, apply_knn_item_based_movie_ratings
+from utils import get_random_movie
+
 
 app = Flask(__name__)
 
@@ -43,6 +45,12 @@ def run_movie_ratings_and_predict():
   if not recommendations: 
     return Response(status=404)
   return {'movies': recommendations}
+
+
+@app.route('/api/knn/item-based-movie-ratings/random-movie', methods=["GET"])
+def get_movie():
+  movie = get_random_movie()
+  return {'movie': movie}
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Grid,
@@ -6,15 +6,46 @@ import {
   TextField,
   FormHelperText,
   FormControl,
+  Tooltip
 } from '@material-ui/core'
+import RefreshIcon from '@material-ui/icons/Refresh';
+import { makeStyles } from '@material-ui/core/styles';
 
 const MovieRatings = () => {
     const [noOfRecommendations, setNoOfRecommendations] = useState(10)
-    const [givenMovie, setGivenMovie] = useState('Iron Man')
+    const [givenMovie, setGivenMovie] = useState('')
     const [recommendations, setRecommendations] = useState([])
     const [runAlgorithm, setRunAlgorithm] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
 
+    const useStyles = makeStyles(() => ({
+      refresh: {
+        cursor: "pointer"
+      },
+      movieText: {
+        width: "40%"
+      }
+    }));
+  
+
+    const getRandomMovie = () => {
+      const requestOptions = {
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+      }
+      fetch('api/knn/item-based-movie-ratings/random-movie', requestOptions).then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      }).then(data => {
+        setGivenMovie(data.movie)
+      })
+    }
+
+    useEffect(() => {
+      getRandomMovie()
+    }, [])
+  
     const handleRunAlgorithm = () => {
       const requestOptions = {
         method: "POST",
@@ -37,6 +68,8 @@ const MovieRatings = () => {
         setRunAlgorithm(false)
       })
     }
+
+    const classes = useStyles()
     
     return (
       <Grid container spacing={2} align="center">
@@ -46,21 +79,26 @@ const MovieRatings = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <FormControl>
+          <FormControl className={classes.movieText}>
             <TextField
               required={true}
-              defaultValue={givenMovie}
+              value={givenMovie}
               onChange={e => setGivenMovie(e.target.value)}
               inputProps={{
-                style: {textAlign: "center"}
+                style: {
+                  textAlign: "center"
+                },
               }}
-            />    
+            /> 
             <FormHelperText>
               <div align="center">
                 Movie
               </div>
             </FormHelperText>
           </FormControl>
+          <Tooltip title="Generate another movie" placement='top'>
+            <RefreshIcon className={classes.refresh} onClick={getRandomMovie}/>
+          </Tooltip>
         </Grid>
         <Grid item xs={12}>
           <FormControl>

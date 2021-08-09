@@ -67,8 +67,8 @@ class knn:
                     processed_movie = movie.replace('"]', '')
                 unpacked_movies.append(processed_movie)
 
-        most_common_movie = Counter(unpacked_movies).most_common(no_of_recommendations)
-        return most_common_movie
+        most_common_movies = Counter(unpacked_movies).most_common(no_of_recommendations)
+        return most_common_movies
 
 
 def apply_knn_user_based_common_movies(k, test_size, ratings):
