@@ -14,6 +14,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Fade } from 'react-reveal'
 
 const Knn = () => {
   const useStyles = makeStyles((theme) => ({
@@ -35,61 +36,65 @@ const Knn = () => {
   return (
     <Grid container spacing={3} align="center" className={classes.root}>
       <Grid item xs={12}>
-        <Typography variant="h4" component="h4">
-          Explore the MovieLens Dataset with the k-nearest neighbours algorithm!
-        </Typography>
+        <Fade bottom>
+          <Typography variant="h4" component="h4">
+            Explore the MovieLens Dataset with the k-nearest neighbours algorithm!
+          </Typography>
+        </Fade>
       </Grid>
       <Grid item xs={12}>
       </Grid>
-      <div className={classes.accordion}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>
-              User-based Collaborative Filtering:
-              Using ratings of common movies across users to determine user similarity
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <CommonMovies />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              User-based Collaborative Filtering:
-              Using average rating of each genre to determine user similarity
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AverageRatings />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              Item-based Collaborative Filtering:
-              Using ratings for each movie to determine movie similarity
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <MovieRatings />
-          </AccordionDetails>
-        </Accordion>
-      </div>
+      <Fade bottom>
+        <div className={classes.accordion}>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>
+                User-based Collaborative Filtering:
+                Using ratings of common movies across users to determine user similarity
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <CommonMovies />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography className={classes.heading}>
+                User-based Collaborative Filtering:
+                Using average rating of each genre to determine user similarity
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <AverageRatings />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography className={classes.heading}>
+                Item-based Collaborative Filtering:
+                Using ratings for each movie to determine movie similarity
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <MovieRatings />
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      </Fade>
       <Grid item xs={12}>
-        <Button to='/' component={Link}><ArrowBackIcon /></Button>
+        <Button to='/' component={Link}><ArrowBackIcon /></Button>    
       </Grid>
     </Grid>
   )
