@@ -4,21 +4,36 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Knn from './Knn'
 import Eda from './Eda'
 import Regression from './Regression'
+import { makeStyles } from '@material-ui/core/styles';
+import { Fade } from 'react-reveal'
 
 
 const Home = () => {
+  const useStyles = makeStyles(() => ({
+    title: {
+      position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  }))
+  const classes = useStyles()
   const renderHomePage = () => {
     return (
-      <Grid container spacing={3} align="center">
+      <Grid container spacing={3} align="center" className={classes.title}>
         <Grid item xs={12}>
-          <Typography variant="h1" component="h1">
-            Playground
-          </Typography>
+          <Fade bottom>
+            <Typography variant="h1" component="h1">
+              Playground
+            </Typography>
+          </Fade>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="text" to="/eda" component={Link}>eda</Button>
-          <Button variant="text" to="/knn" component={Link}>k-nearest neighbours</Button>
-          <Button variant="text" to="/regression" component={Link}>regression</Button>
+          <Fade bottom>
+            <Button variant="text" to="/eda" component={Link}>eda</Button>
+            <Button variant="text" to="/knn" component={Link}>k-nearest neighbours</Button>
+            <Button variant="text" to="/regression" component={Link}>regression</Button>
+          </Fade>
         </Grid>
       </Grid>
     )

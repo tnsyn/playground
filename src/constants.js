@@ -68,6 +68,30 @@ const genres = [
     'Western'
 ]
 
+const noOfRatings = [30635,24161,6988,9208,39053,16681,1219,41928,11834,870,7291,4145,4138,7674,18124,17243,26452,4859,1930]
+
+const averageRatings = [
+  3.45,
+  3.51,
+  3.63,
+  3.41,
+  3.38,
+  3.66,
+  3.80,
+  3.66,
+  3.49,
+  3.92,
+  3.26,
+  3.62,
+  3.56,
+  3.63,
+  3.51,
+  3.46,
+  3.49,
+  3.81,
+  3.58
+]
+
 const marks = [
     {
       value: 1,
@@ -119,5 +143,7 @@ const marks = [
 module.exports = {
     commonMovies,
     genres,
+    noOfRatings,
+    averageRatings,
     marks
 }

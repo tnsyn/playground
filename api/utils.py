@@ -7,7 +7,8 @@ def get_random_movie():
   random_index = random.randint(0, len(dataset))
   random_id = dataset['movieId'][random_index]
   random_movie = movies[movies['movieId'] == random_id]['title'].values[0]
-  return random_movie
+  random_movie_processed = random_movie.split(' (')[0]
+  return random_movie_processed
 
 
 if __name__ == '__main__':
