@@ -170,7 +170,6 @@ def apply_knn_item_based_movie_ratings(no_of_recommendations, given_movie):
     dataset.reset_index(inplace=True)
     # See if provided movie exists in the dataset
     movie_list = movies[movies['title'].str.contains(given_movie)]
-    print(len(movie_list))
     if len(movie_list):
         # Extract the movieId
         movieId = movie_list.iloc[0]['movieId']
