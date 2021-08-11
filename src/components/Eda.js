@@ -10,17 +10,20 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Fade } from 'react-reveal';
 import GenreRatingsCount from './GenreRatingsCount'
 import GenreAverageRatings from './GenreAverageRatings'
+import UniqueGenres from './UniqueGenres'
 
 const Eda = () => {
   const useStyles = makeStyles(() => ({
     title: {
-      margin: '5em'
+      marginTop: '5em',
+      marginBottom: '1em'
     },
     charts: {
       display: 'flex',
       marginLeft: '10%',
       marginRight: '10%',
-      justifyContent: "space-around"
+      justifyContent: "space-around",
+      flex: 'wrap'
     }
   }))
   const classes = useStyles()
@@ -33,9 +36,20 @@ const Eda = () => {
           </Typography>
           </Fade>
       </Grid>
-      <Grid item xs={12} className={classes.charts}>
-        <GenreRatingsCount />
-        <GenreAverageRatings />
+      <Grid item xs={12}>
+        <Fade bottom>
+          <UniqueGenres />
+        </Fade>
+      </Grid>
+      <Grid item xs={12}>
+        <Fade bottom>
+          <GenreRatingsCount />
+        </Fade>
+      </Grid>
+      <Grid item xs={12}>
+        <Fade bottom>
+          <GenreAverageRatings />
+        </Fade>
       </Grid>
       <Grid item xs={12}>
         <Button to='/' component={Link}><ArrowBackIcon /></Button>
