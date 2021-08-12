@@ -1,5 +1,4 @@
 import React from 'react'
-import { genres } from '../constants'
 import {
   Grid,
   Typography

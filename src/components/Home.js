@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Button, Typography } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Knn from './Knn'
 import Eda from './Eda'
@@ -15,6 +15,10 @@ const Home = () => {
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)'
+    },
+    image: {
+      width: '70%',
+      marginLeft: '1em'
     }
   }))
   const classes = useStyles()
@@ -23,9 +27,7 @@ const Home = () => {
       <Grid container spacing={3} align="center" className={classes.title}>
         <Grid item xs={12}>
           <Fade bottom>
-            <Typography variant="h1" component="h1">
-              Playground
-            </Typography>
+            <img src='/playground.jpg' alt="playground" className={classes.image}></img>
           </Fade>
         </Grid>
         <Grid item xs={12}>
