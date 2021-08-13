@@ -14,21 +14,25 @@ const Home = () => {
       position: 'fixed',
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
     },
     image: {
       width: '70%',
-      marginLeft: '1em'
+      marginLeft: '1em',
+    },
+    text: {
+      fontFamily: "Calligraphy",
+      fontSize: '16vw'
     }
   }))
   const classes = useStyles()
   const renderHomePage = () => {
     return (
       <Grid container spacing={3} align="center" className={classes.title}>
-        <Grid item xs={12}>
-          <Fade bottom>
-            <img src='/playground.jpg' alt="playground" className={classes.image}></img>
-          </Fade>
+        <Grid item xs={12} className={classes.playground}>
+          <div className={classes.text}>
+            playground
+          </div>
         </Grid>
         <Grid item xs={12}>
           <Fade bottom>
