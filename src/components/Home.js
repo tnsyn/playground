@@ -30,9 +30,11 @@ const Home = () => {
     return (
       <Grid container spacing={3} align="center" className={classes.title}>
         <Grid item xs={12} className={classes.playground}>
-          <div className={classes.text}>
-            playground
-          </div>
+          <Fade bottom>
+            <div className={classes.text}>
+              playground
+            </div>
+          </Fade>
         </Grid>
         <Grid item xs={12}>
           <Fade bottom>
