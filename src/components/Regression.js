@@ -3,7 +3,7 @@ import React from 'react'
 const Regression = () => {
   return (
     <div>
-      This is regression
+      To be explored in the future! :)
     </div>
   )
 }
