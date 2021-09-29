@@ -40,7 +40,7 @@ const Home = () => {
           <Fade bottom>
             <Button variant="text" to="/eda" component={Link}>eda</Button>
             <Button variant="text" to="/knn" component={Link}>k-nearest neighbours</Button>
-            <Button variant="text" to="/regression" component={Link}>regression</Button>
+            {/* <Button variant="text" to="/regression" component={Link}>regression</Button> */}
           </Fade>
         </Grid>
       </Grid>
